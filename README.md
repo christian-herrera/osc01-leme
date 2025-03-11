@@ -1,6 +1,8 @@
-<h1 align="center">OSC01 - Tektronix TDS360<br/><br/>
+<h1 align="center">OSC01 - TDS360<br/><br/>
 <div align="center">
-<img src="assets/images/leme.png" style="max-width: 100%" width=200><br/><br/>
+<img src="assets/images/leme.svg" style="max-width: 100%" width=200><br/>
+<img src="assets/images/tektronix.svg" style="max-width: 100%" width=100><br/>
+<br/>
 
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/christian-herrera/osc01-leme)
