@@ -1,0 +1,77 @@
+\chapter{Programación en MatLab}
+% ------------------------------------------------------------------------------
+\section{Funciones Implementadas}
+La primer versión usando App Designer, de la suite de MatLab, incorpora funciones que hacen posible el intercambio de información. A continuación se puede ver la versión resumida que permite obtener las muestras. En la aplicación, esto resulta mas complejo ya que se decide si alguno de los canales se deshabilito para su lectura, el control de la ventana de progreso y el manejo de los errores.
+
+
+\begin{lstlisting}[style=Matlab]
+	function LeerValores(app)
+		%Leo valores
+		flush(app.serial.connection,"input");
+		flush(app.serial.connection,"output");
+		
+		%Solicito los valores de las configuraciones
+		app.raw_data.dt = str2double(writeread(app.serial.connection,"WFMPRE:CH1:XINCR?"));
+		pp.raw_data.trig_pos = str2double(writeread(app.serial.connection, "HORIZONTAL:TRIGGER:POSITION?"));
+
+		
+		%Solicito las muestras del canal 1
+		writeline(app.serial.connection,"DATA:SOURCE CH1"); pause(0.5);
+		writeline(app.serial.connection,"CURVE?"); pause(0.5);
+		ch_t = readline(app.serial.connection);
+		app.raw_data.ch1 = str2double(split(ch_t, ","));
+		
+		%Leo sus configuraciones
+		app.raw_data.ch1_mult = str2double(writeread(app.serial.connection, "WFMPRE:CH1:YMULT?"));
+		app.raw_data.ch1_zero = str2double(writeread(app.serial.connection, "WFMPRE:CH1:YZERO?"));
+		app.raw_data.ch1_off = str2double(writeread(app.serial.connection, "WFMPRE:CH1:YOFF?")); 
+		
+		%Solicito las muestras del canal 2
+		writeline(app.serial.connection,"DATA:SOURCE CH2"); pause(0.5);
+		writeline(app.serial.connection,"CURVE?"); pause(0.5);
+		ch_t = readline(app.serial.connection);
+		app.raw_data.ch2 = str2double(split(ch_t, ","));
+		
+		%Leo sus configuraciones
+		app.raw_data.ch2_mult = str2double(writeread(app.serial.connection, "WFMPRE:CH2:YMULT?"));
+		app.raw_data.ch2_zero = str2double(writeread(app.serial.connection, "WFMPRE:CH2:YZERO?"));
+		app.raw_data.ch2_off = str2double(writeread(app.serial.connection, "WFMPRE:CH2:YOFF?"));
+	end
+\end{lstlisting}
+
+
+Por otra parte, se presenta a continuación la función \texttt{callback} que se ejecuta al presionar el botón conectar.
+
+\begin{lstlisting}[style=Matlab, firstnumber=last]
+	function btn_serialConnectButtonPushed(app, event)
+		app.serial.connection = serialport(app.dd_serialPort.Value, app.ef_serialBPS.Value, "Timeout", 10);
+		
+		%Configuro el Encoding y los Bytes
+		writeline(app.serial.connection,"DATA:ENCDG ASCII");
+		writeline(app.serial.connection,"HEADER OFF");
+		writeline(app.serial.connection,"DATA:WIDTH 2");
+		
+		%Verifico que sea el modelo correcto
+		resp = writeread(app.serial.connection, "ID?");
+		if ~strcmp(strip(resp, 'right'), "ID TEK/TDS 360,CF:91.1CT,FV:v1.09")
+			e.message = 'Erro, el ID no corresponde al Osciloscopio TDS360';
+			e.identifier = 'Serial:IDError';
+			error(e);                        
+		end
+	end
+\end{lstlisting}
+
+El resto de la programación no es relevante en cuanto a la comunicación con el osciloscopio, por tal motivo se adjunta al documento, un archivo .zip con la versión editable de la misma.
+
+% ------------------------------------------------------------------------------
+\section{Configuración en el Osciloscopio}
+El osciloscopio tiene el menú para configurar los parámetros de la comunicación serial, la aplicación esta desarrollada para comunicarse con los mismos parámetros que tiene de fabrica el osciloscopio, por tal motivo si hubiera problemas en la comunicación, no siendo una motivo la velocidad de transmisión, entonces se podrá ajustar la configuración de fabrica y asi resolver el inconveniente.
+
+
+
+
+
+
+
+
+

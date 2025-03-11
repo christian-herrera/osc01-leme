@@ -1,0 +1,221 @@
+%----------------------------------------------------------------------------------------
+%	PAQUETES GENERALES
+%----------------------------------------------------------------------------------------
+\usepackage[spanish]{babel} 			% Configuracion para palabras en Español (Le quite es-noshorthands)
+\usepackage{microtype} 					% Mejor tipografia
+\usepackage{amsmath,amsfonts,amsthm} 	% Paquetes para matematicas
+\usepackage{graphicx} 					% Requerido para agregar imagenes
+\usepackage{float}						% Requerido para el posicionamiento flotante
+\usepackage{tcolorbox}					% Permite hacer recuadros para definiciones
+\usepackage{multicol}					% Multicolumnas
+\usepackage[hidelinks]{hyperref}		% Para el manejo de los hipervinculos
+\usepackage{color}						% Permite colocar colores a los textos
+\usepackage{circuitikz}					% Permite crear circuitos electricos
+
+%----------------------------------------------------------------------------------------
+%	TIPOGRAFIA
+%----------------------------------------------------------------------------------------
+% OPCION 1 -> Usa la fuente instalada en el sistema
+\usepackage{fontspec}						% Configura la fuente. 
+\setmainfont{Roboto}						% Para usar Arial, instalar ttf-mscorefonts-installer
+
+% Bloque Inline de Codigo
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{light-gray}{\lstinline|#1|}}
+
+
+
+%----------------------------------------------------------------------------------------
+%	MARGINS AND SPACING
+%----------------------------------------------------------------------------------------
+\usepackage{geometry}
+\geometry{
+	top=1cm,
+	bottom=1cm,
+	left=1cm,
+	right=1cm,
+	includehead,
+	includefoot,
+	%showframe, % Descomentar para visualizar los limites
+}
+
+% \setlength{\columnsep}{5mm} % Separacion entre columnas
+\usepackage{titlesec}						% Permite modificar los espacios de los titulos
+\titlespacing{\section}{0pt}{20pt}{5pt}		% Izquierda del titulo, Antes y despues del mismo
+
+
+\usepackage{afterpage}
+
+\def\blankpage{%
+	\clearpage%
+	\addtocounter{page}{-1}%
+	\null%
+	\clearpage}
+
+
+%----------------------------------------------------------------------------------------
+%	ENCABEZADO Y PIE DE PAGINA
+%----------------------------------------------------------------------------------------
+\usepackage{fancyhdr}	% Permite modificar los Encabezados y Pie de Pagina
+\usepackage{lastpage} 	% Used to determine the number of pages in the document (for "Page X of Total")
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{1pt}
+	\renewcommand{\footrulewidth}{1pt}
+	\fancyfoot[OR, EL]{Pagina \thepage/\pageref*{LastPage}}
+	\fancyfoot[OL, ER]{Christian Yoel Herrera}
+	\fancyhead[OR, EL]{\textsc{\fecha}}
+	\fancyhead[OL, ER]{\tituloHeader}
+}
+
+\newcommand{\blankPage}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+	\cleardoublepage
+}
+
+
+
+%----------------------------------------------------------------------------------------
+%	TEXTO EN GENERAL
+%----------------------------------------------------------------------------------------
+\usepackage{parskip}							% Al usarlo, elimina los espacios entre parrafos
+\setlength{\parindent}{0pt} 					% Elimina la sangría
+\setlength{\parskip}{6pt plus 1pt minus 1pt} 	% Separacion base: 6pt, Maximo adicional 2pt y minimo adicional 1pt
+
+
+
+%----------------------------------------------------------------------------------------
+%	FORMATO PARA EL BLOQUE DE CODIGO EN LENGUAJE C
+%----------------------------------------------------------------------------------------
+\usepackage{listings}	% Permite bloques de codigo
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+	backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{mPurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=1mm,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C,
+	xleftmargin=3mm, 
+	xrightmargin=2mm,
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codeblue}{rgb}{0.2, 0.58, 0.9}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{Matlab}{
+	language=Matlab,
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codepurple},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codeblue},
+	basicstyle=\ttfamily\footnotesize,
+	morekeywords={function,writeline,readline,str2double,flush,writeread,split},
+	deletekeywords={input},
+	morestring=*[d]{"},
+	numbers=left,       
+	numbersep=-5pt,        
+	showstringspaces=false,
+	tabsize=2,
+	xleftmargin=0.6cm,
+	xrightmargin=0.6cm,
+	framexleftmargin=10pt,
+	framexrightmargin=10pt,
+}
+
+\lstdefinestyle{rawStyle}{
+	numberstyle=\tiny\color{mGray},
+	basicstyle=\ttfamily,
+	numbers=left,                    
+	numbersep=5pt,                  
+	xleftmargin=0.7cm
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	CONFIGURACION DEL CUERPO (TABLAS Y FIGURAS)
+%----------------------------------------------------------------------------------------
+\usepackage{booktabs}		% Para centrar las tablas
+%\newcommand{\configCuerpo}{
+	%	\renewcommand{\figurename}{Figura}
+	%	\renewcommand{\tablename}{Tabla}
+	%}
+\definecolor{GrayCaptions}{rgb}{0.5,0.5,0.5}
+\usepackage[
+font={color=GrayCaptions},
+figurename=Imagen,
+tablename=Tabla,
+labelfont={it}
+]{caption}
+\setlength{\abovecaptionskip}{5pt plus 2pt minus 2pt} % Separacion de los 'captions' con el objeto
+\setlength{\belowcaptionskip}{5pt plus 2pt minus 2pt} % Separacion de los 'captions' con el texto que continua.
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	FORMATO DE LOS CAPITULOS
+%----------------------------------------------------------------------------------------
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}							% Formato general
+{\vspace{-2cm}\huge\chaptertitlename\ \thechapter}	% Formato y contenido del subtitulo
+{20pt}												% Separacion entre ambos
+{\Huge}												% Codigo a ejecutar antes del Subtitulo
+
+
+
+%----------------------------------------------------------------------------------------
+%	BOXS PERSONALIZADOS
+%----------------------------------------------------------------------------------------
+\newtcolorbox{boxDef}[1]{
+	center,
+	width=0.9\textwidth,
+	arc=0.2mm,
+	boxrule=1pt,
+	colframe=black,
+	left=3pt,   % Relleno a la izquierda
+	right=3pt,  % Relleno a la derecha
+	top=3pt,    % Relleno en la parte superior
+	bottom=3pt, % Relleno en la parte inferior
+	title=#1, 	% Utiliza el argumento para el título
+}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAFIA (Para deshabilitar, comentar lo siguiente)
+%----------------------------------------------------------------------------------------
+\usepackage{csquotes}
+\usepackage[
+	backend=biber,
+	style=apa,
+	sortcites,
+	url=true
+]{biblatex}
+\addbibresource{Bibliografia.bib}
+

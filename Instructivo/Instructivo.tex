@@ -1,0 +1,41 @@
+\documentclass[spanish,10pt,a4paper,twoside,openright]{book}
+
+%Informacion
+% - Instalar la fuente 'Roboto'
+
+
+\input{structure.tex}
+
+\newcommand{\titulo}{Adquisición de Datos - Tektronix TDS360}
+\newcommand{\tituloHeader}{Aplicacion para Tektronix TDS360}
+\newcommand{\subtitulo}{Diseño de Aplicación en MatLab R2023b}
+\newcommand{\autor}{Christian Yoel Herrera}
+\newcommand{\fecha}{11 de Marzo de 2025}
+\newcommand{\departamento}{Departamento de Electrotecnia}
+
+\usepackage{lipsum}
+
+
+
+\begin{document}
+	\pagestyle{plain}
+	\input{Portada.tex}
+	\blankPage
+	\tableofcontents
+	\pagestyle{plain}
+	
+	% ------------------------> SECCIONES
+	\input{seccions/Introduccion.tex}
+	\input{seccions/Version_1_0.tex}
+	\input{seccions/App_V1.0_Manual.tex}
+	% -----------------------------------
+	
+	
+
+
+
+	% Bibliografia
+	%\nocite{*}	% Incorpora todas las referencias, aunque no esten citadas
+	%\printbibliography[title={Bibliografia}, heading=bibintoc]
+	
+\end{document}
